@@ -1,26 +1,20 @@
 function solution(N, stages) {
-    let answer = [];
-    let challenge = stages.length
-    
-    for (let j = 1; j <= N; j++) {
-        let start = j
-        let users = []
-        let failureRate = 0
-        let user = 0
-        
-        for (let k = 0; k < stages.length; k++) {
-            let current = stages[k]
-            if (start !== current) continue
-            if (start === current) {
-                users.push(current)
-                user = users.length
-            }
+    let ans = []
+
+    for (let i = 1; i <= N; ++i) {
+        let usersReachedCurrentStage   = stages.reduce((acc, curStage) => acc + ((curStage >= i) ? 1 : 0), 0)
+        let usersStagnatedCurrentStage = stages.reduce((acc, curStage) => acc + ((curStage == i) ? 1 : 0), 0)
+        if (usersReachedCurrentStage === 0) {
+            ans.push({ 'stage': i, 'failRate': 0 })
+            continue
         }
-            failureRate = users.length / (challenge - user)
-            answer.push({stage: j, rate: failureRate})
-            challenge -= user
+
+        ans.push({ 'stage': i, 'failRate': (usersStagnatedCurrentStage / usersReachedCurrentStage) })
     }
-    
-    answer.sort((a, b) => b.rate - a.rate)
-    return answer.map(s => s.stage);
+
+    return ans.sort((a, b) => {
+        if (a.failRate > b.failRate) return -1
+        if (a.failRate < b.failRate) return 1
+        return a.stage - b.stage
+    }).map(entry => entry.stage)
 }
