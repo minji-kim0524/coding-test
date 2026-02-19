@@ -13,4 +13,7 @@
 | 총 풀이 문제 수: 130+
 - Lv.0: 64
 - Lv.1: 69
-- Lv.2: 9
+- Lv.2: 10
+
+
+![프로그래머스 랭킹뱃지](https://raw.githubusercontent.com/minji-kim0524/programmers-badge/master/static/result.svg)
