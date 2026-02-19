@@ -1,13 +1,13 @@
-function solution(s) {
-    const stack = []
+function solution(s)
+{
 
-    for (let i = 0; i < s.length; i++) {
-        if (stack.length > 0 && stack[stack.length - 1] === s[i]) {
-            stack.pop();
-        } else {
-            stack.push(s[i]);
+    var walk = [];
+    for (var n of s) {
+        var last = walk.pop();
+        if (last != n) {
+            last && walk.push(last);
+            walk.push(n);
         }
     }
-
-    return stack.length === 0 ? 1 : 0;
+    return walk.length ? 0 : 1;
 }
