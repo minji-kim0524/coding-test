@@ -8,9 +8,11 @@ on:
 jobs:
  dispatch:
    runs-on: ubuntu-latest
+   env: 
+    FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
    steps:
      - name: Trigger repository dispatch
-       uses: peter-evans/repository-dispatch@v1
+       uses: peter-evans/repository-dispatch@v3
        with:
          token: ${{ secrets.GH_PAT }}
          repository: minji-kim0524/programmers-badge
